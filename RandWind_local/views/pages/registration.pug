@@ -1,0 +1,104 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  meta(name='description' content='')
+  title RandWind Registration
+  link(rel='icon' href='../resources/img/favicon.ico' type='image/x-icon')
+  // Bootstrap core CSS
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css' integrity='sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS' crossorigin='anonymous')
+  link(href='../resources/css/my_style.css' rel='stylesheet')
+img.img-fluid(src='../resources/img/beproudcapaabanner.jpg' alt='Registration Page Banner for CU Football')
+br
+br
+nav.navbar.navbar-expand-lg.navbar-light(style='background: #D7E6F3;')
+  a.navbar-brand(href='home.html')
+    img(src='../resources/img/randwind_logo.png' alt='' width='30%' height='30%')
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarText' aria-controls='navbarText' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarText.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        a.nav-link(href='/') Home
+      li.nav-item
+        a.nav-link(href='/about')
+          | About
+          span.sr-only (current)
+      li.nav-item
+        a.nav-link(href='/saved_strings') My Generations
+      li.nav-item
+        a.nav-link(href='/login') Login
+      li.nav-item.active
+        a.nav-link(href='/registration') Register
+    .form-inline.my-2.my-lg-0
+      button.btn.btn-outline-light.my-2.my-sm-0(type='submit') Logout
+.container
+  form(action='home.html')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='fullName') Full Name
+      .col-sm-10
+        input#fullName.form-control(type='text' name='fullName' placeholder='Enter Name')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='emailAddress') Email address
+      .col-sm-10
+        input#emailAddress.form-control(type='email' name='emailAddress' placeholder='Enter email')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='passwordFirst') Password
+      .col-sm-10
+        input#passwordFirst.form-control(type='password' name='passwordFirst' placeholder='Password')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='passwordConfirm') Confirm Password
+      .col-sm-10
+        input#passwordConfirm.form-control(type='password' name='passwordConfirm' placeholder='Confirm Password')
+    fieldset.form-group
+      .row
+        legend.col-form-label.col-sm-2.pt-0 CU Boulder Alumni
+        .col-sm-10
+          .form-check
+            input#alumniStatusYes.form-check-input(type='radio' name='alumniStatus' value='Yes' required='')
+            label.form-check-label(for='alumniStatusYes')
+              | Yes
+          .form-check
+            input#alumniStatusNo.form-check-input(type='radio' name='alumniStatus' value='No')
+            label.form-check-label(for='alumniStatusNo')
+              | No
+    fieldset.form-group
+      .row
+        legend.col-form-label.col-sm-2.pt-0 CU Boulder Student
+        .col-sm-10
+          .form-check
+            input#studentStatusYes.form-check-input(onclick="viewStudentStats('student_status', 1)" type='radio' name='studentStatus' value='Yes' required='')
+            label.form-check-label(for='studentStatusYes')
+              | Yes
+          .form-check
+            input#studentStatusNo.form-check-input(onclick="viewStudentStats('student_status', 0)" type='radio' name='studentStatus' value='No')
+            label.form-check-label(for='studentStatusNo')
+              | No
+      #student_status.row
+        legend.col-form-label.col-sm-2.pt-0 Student Status
+        .col-sm-10
+          .form-check
+            input#undergrad.form-check-input(onclick="viewStudentStats('undergrad_select', 1);viewStudentStats('grad_select', 0);" type='radio' name='student_type' value='U')
+            label.form-check-label(for='undergrad')
+              | Undergrad
+          select#undergrad_select.custom-select.custom-select-sm(name='undergrad_level')
+            option(selected='') Select Student Status
+            option(value='1') Freshman
+            option(value='2') Sophomore
+            option(value='3') Junior
+            option(value='4') Senior
+          .form-check
+            input#graduate.form-check-input(onclick="viewStudentStats('undergrad_select', 0);viewStudentStats('grad_select', 1);" type='radio' name='student_type' value='G')
+            label.form-check-label(for='graduate')
+              | Grad
+          select#grad_select.custom-select.custom-select-sm(name='grad_level')
+            option(selected='') Select Student Status
+            option(value='1') Masters
+            option(value='2') MBA
+            option(value='3') PhD
+    input.btn.btn-primary.btn-block(type='submit' value='submit')
+  br
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut' crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js' integrity='sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k' crossorigin='anonymous')
+script(src='../resources/js/my_scripts.js')
