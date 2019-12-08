@@ -25,9 +25,16 @@ var pgp = require('pg-promise')();
   password: This the password for accessing the database.  You'll need to set a password USING THE PSQL TERMINAL THIS IS NOT A PASSWORD FOR POSTGRES USER ACCOUNT IN LINUX!
 **********************/
 
-//const dbConfig = process.env.DATABASE_URL;
+const dbConfig = process.env.DATABASE_URL;
+//const dbConfig = {
+//	host: 'localhost',
+//	port: 5432,
+//	database: 'randwind_db',
+//	user: 'postgres',
+//	password: 'cat96'
+//};
 
-//var db = pgp(dbConfig);
+var db = pgp(dbConfig);
 
 // set the view engine to pug
 app.set('view engine', 'pug');
@@ -66,11 +73,6 @@ app.get('/generated_string', function(req, res) {
 			my_title:"Generated String",
 			randSTR: process.stdout.toString()
 		});
-
-
-
-
-
     // This is for asycn process
 		//process.stdout.on('data', function(data) {
 		//		console.log(`stdout: ${data}`);
@@ -108,6 +110,39 @@ app.get('/registration', function(req, res) {
 	res.render('pages/registration',{
 		my_title:"Registration Page"
 	});
+});
+
+app.post('/', function(req, res) {
+  var name = req.body.fullName;
+	var email = req.body.emailAddress;
+	var password = req.body.passwordConfirm;
+  var business = req.body.businessStatus;
+  var security = req.body.securityStatus
+  console.log(name)
+  console.log(email)
+  console.log(password)
+  console.log(business)
+  console.log(security)
+	var insert_statement = "INSERT INTO registration(user_name, user_email, user_pass, business, security) VALUES('" + name + "','" +
+							email + "','" + password +"','" + business + "','" + "','" + security + "') ON CONFLICT DO NOTHING;";
+
+	db.task('get-everything', task => {
+        return task.batch([
+            task.any(insert_statement),
+        ]);
+    })
+    .then(info => {
+    	res.render('pages/home',{
+				my_title: "Home Page"
+			})
+    })
+    .catch(error => {
+        // display error message in case an error
+            //req.flash('error', error); //if this doesn't work for you replace with console.log
+            res.render('pages/home', {
+                title: 'Home Page'
+            })
+    });
 });
 
 
