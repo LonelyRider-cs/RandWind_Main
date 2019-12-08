@@ -57,16 +57,28 @@ app.get('/', function(req, res) {
 app.get('/generated_string', function(req, res) {
 
     // calling python scripts
-		var spawn = require("child_process").spawn;
-		var process = spawn('python', ["./python/helloworld.py", req.query.strLength, req.query.uniqueCharachters])
+		var spawn = require("child_process").spawnSync;
+		var process = spawn('python', ["./python/driver.py", req.query.strLength, req.query.uniqueCharachters])
 
-		process.stdout.on('data', function(data) {
-				console.log(data.toString());
-				res.render('pages/generated_string',{
-					my_title:"Generated String",
-					randSTR: data.toString()
-				});
-    });
+
+		console.log(process.output[2].toString());
+		res.render('pages/generated_string',{
+			my_title:"Generated String",
+			randSTR: process.stdout.toString()
+		});
+
+
+
+
+
+    // This is for asycn process
+		//process.stdout.on('data', function(data) {
+		//		console.log(`stdout: ${data}`);
+		//		res.render('pages/generated_string',{
+		//			my_title:"Generated String",
+		//			randSTR: data.toString()
+		//		});
+    //});
 });
 
 // about page
