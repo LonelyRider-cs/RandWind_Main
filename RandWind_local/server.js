@@ -90,6 +90,7 @@ app.get('/about', function(req, res) {
 	});
 });
 
+// saved strins
 app.get('/saved_strings', function(req, res) {
 	res.render('pages/saved_strings',{
 		local_css:"signin.css",
@@ -112,6 +113,7 @@ app.get('/registration', function(req, res) {
 	});
 });
 
+//returns to home screen after successfully registering
 app.post('/', function(req, res) {
   var name = req.body.fullName;
 	var email = req.body.emailAddress;
