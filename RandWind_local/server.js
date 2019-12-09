@@ -124,7 +124,7 @@ app.post('/', function(req, res) {
   console.log(business)
   console.log(security)
 	var insert_statement = "INSERT INTO registration(user_name, user_email, user_pass, business, security) VALUES('" + name + "','" +
-							email + "','" + password +"','" + business + "','" + "','" + security + "') ON CONFLICT DO NOTHING;";
+							email + "','" + password +"','" + business + "','" + security + "') ON CONFLICT DO NOTHING;";
 
 	db.task('get-everything', task => {
         return task.batch([
