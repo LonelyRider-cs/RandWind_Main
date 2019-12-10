@@ -57,6 +57,7 @@ def getRandomContours(num_angles, start_frame):
         #if we have not satisfied either of the two other options then the number of angles is not enough yet and the while loop should continue
         else:
             pass
+        curr_frame = curr_frame + 1
 
     return angles, curr_frame
 
