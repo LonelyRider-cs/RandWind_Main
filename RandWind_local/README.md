@@ -25,9 +25,11 @@ if you need to clone the ropository first:
 2. cd randwind
 
 To deploy changes:
-1. git add .
-2. git commit -am "message"
-3. git push heroku master
+1. git init
+2. heroku git:remote -a randwind
+3. git add .
+4. git commit -am "message"
+5. git push heroku master
 
 
 Website can be found at:
