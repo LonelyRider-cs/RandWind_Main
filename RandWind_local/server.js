@@ -114,6 +114,7 @@ const checkPassword = async (userEmail, userPassword) => {
 
 	db.one('SELECT user_pass FROM registration WHERE user_email=$1', [userEmail], h => h)
 	.then(hash => {
+    if(hash.lengh() > 0) {
 		bcrypt.compare(userPassword, hash, function(err, res) { //res is true if match, false if not
 			if (res) { //If the password matches hash
 				return true;
@@ -121,6 +122,9 @@ const checkPassword = async (userEmail, userPassword) => {
 				return false;
 			}
 		});
+  } else {
+    return false;
+  }
 	})
 	.catch(error => {
 		// display error message in case an error
@@ -356,7 +360,7 @@ app.post('/saveString', (req, res) => {
 
 
 app.post('/load_generations', function(req,res){
-	//console.log("loadstrings started");
+	console.log("loadstrings started");
 	db.any('SELECT rand_string, string_id FROM random_strings WHERE user_email=$1', [req.session.userEmail])
 	.then(retrievedStrings => {
 		if (retrievedStrings) {
