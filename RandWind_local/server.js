@@ -59,14 +59,12 @@ var mySession = {genid: function(req) {
       expires: 600000
   }};
 
-app.use(session(mySession));
-
 if (app.get('env') === 'production') { //This makes it so our cookies are secure/only work over TSL/SSL if the environment is production (So we can still dev in usecure env)
 	app.set('trust proxy', 1) // trust first proxy
 	mySession.cookie.secure = true // serve secure cookies
 };
 
-
+app.use(session(mySession));
 
 console.log("node executed");
 
