@@ -52,6 +52,7 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
 var mySession = {genid: function(req) {
   return uuidv1(); // use UUIDs for session IDs (makes unique ses ID)
   },
+  store: new(require('connect-pg-simple')(session))(),
   secret: 'badabadaRadaRada',
   resave: false,
   saveUninitialized: false,
