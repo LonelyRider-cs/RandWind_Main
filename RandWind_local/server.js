@@ -330,8 +330,9 @@ app.post('/register', [
 
 });
 
+
 app.post('/saveString', [
-	check('fullName', 'Your name must be between 2 and 50 characters').isLength({ min: 2, max:50 }).trim().escape(),
+	check(req.session.currentString, 'String Corrupted').not().isEmpty().trim().escape(),
   ], (req, res) => {
 	const validationErrors = validationResult(req);
   	if(!validationErrors.isEmpty()){
@@ -348,11 +349,32 @@ app.post('/saveString', [
 			res.redirect('/saved_strings');
 			return;
 		}else{res.redirect('/');
-		return;
+			return;
 		}
 	}
 	return;
 
 });
+
+
+app.post('/load_generations', function(req,res){
+	//console.log("loadstrings started");
+	db.any('SELECT rand_string, string_id FROM random_strings WHERE user_email=$1', [req.session.userEmail])
+	.then(retrievedStrings => {
+		if (retrievedStrings) {
+			res.send(retrievedStrings);
+			return retrievedStrings;
+		  } else {
+			console.log("No strings present")
+			res.send({});
+		  }
+	})
+	.catch(error => {
+		// display error message in case an error
+			//req.flash('error', error); //if this doesn't work for you replace with console.log
+			console.log(error);
+	});
+});
+
 
 app.listen(process.env.PORT);
