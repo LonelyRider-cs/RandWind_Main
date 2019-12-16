@@ -49,24 +49,24 @@ const db = pgp(dbConfig);
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
+var mySession = {genid: function(req) {
+  return uuidv1(); // use UUIDs for session IDs (makes unique ses ID)
+  },
+  secret: 'badabadaRadaRada',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      expires: 600000
+  }};
 
-var mySession;
+app.use(session(mySession));
 
 if (app.get('env') === 'production') { //This makes it so our cookies are secure/only work over TSL/SSL if the environment is production (So we can still dev in usecure env)
 	app.set('trust proxy', 1) // trust first proxy
 	mySession.cookie.secure = true // serve secure cookies
 };
 
-app.use(session({genid: function(req) {
-  return uuidv1(); // use UUIDs for session IDs (makes unique ses ID)
-  },
 
-  secret: 'badabadaRadaRada',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      expires: 600000
-  }}));
 
 console.log("node executed");
 
