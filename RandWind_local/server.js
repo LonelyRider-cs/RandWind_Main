@@ -34,14 +34,14 @@ var pgp = require('pg-promise')();
   password: This the password for accessing the database.  You'll need to set a password USING THE PSQL TERMINAL THIS IS NOT A PASSWORD FOR POSTGRES USER ACCOUNT IN LINUX!
 **********************/
 
-//const dbConfig = process.env.DATABASE_URL; //heroku DB
-const dbConfig = {
-	host: 'localhost',
-	port: 5432,
-	database: 'randwind_db',
-	user: 'postgres',
-	password: 'password'//'cat96'
-};
+const dbConfig = process.env.DATABASE_URL; //heroku DB
+//const dbConfig = {
+//	host: 'localhost',
+//	port: 5432,
+//	database: 'randwind_db',
+//	user: 'postgres',
+//	password: 'password'//'cat96'
+//};
 
 const db = pgp(dbConfig);
 
@@ -358,3 +358,5 @@ app.post('/saveString', [
 	return;
 
 });
+
+app.listen(process.env.PORT);
