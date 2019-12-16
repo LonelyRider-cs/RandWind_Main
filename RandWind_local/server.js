@@ -331,9 +331,7 @@ app.post('/register', [
 });
 
 
-app.post('/saveString', [
-	check(req.session.currentString, 'String Corrupted').not().isEmpty().trim().escape(),
-  ], (req, res) => {
+app.post('/saveString', (req, res) => {
 	const validationErrors = validationResult(req);
   	if(!validationErrors.isEmpty()){
 		console.log(validationErrors);
