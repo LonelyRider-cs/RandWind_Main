@@ -99,7 +99,7 @@ app.use(bodyParser.json());
 
 // middleware function to check for logged-in users
 const isLoggedIn = (req, res, next) => {
-	console.log("islogged func entered");
+	//console.log("islogged func entered");
     if (req.session.userEmail) {
 		//console.log("Logged in");
         return true;
@@ -243,7 +243,7 @@ app.post('/auth', function(req, res) { //Hitting login
 	console.log("Login Auth started");
 	const email = req.body.inputEmail;
 	const password = req.body.inputPassword;
-	console.log(email,password)
+	////
 	if (email && password) {
 		if(checkPassword(email, password)) { //Succesful login
 			req.session.loggedin = true;
@@ -308,8 +308,8 @@ app.post('/register', [
 		const business = req.body.businessStatus;
 		const security = req.body.securityStatus;
 
-		//console.log(business);
-		//console.log(security);
+		console.log(business);
+		console.log(security);
 
 
 		bcrypt.genSalt(saltRounds, function(err, salt) {
@@ -330,8 +330,9 @@ app.post('/register', [
 
 });
 
-
-app.post('/saveString', (req, res) => {
+app.post('/saveString', [
+	check(req.session.currentString, 'String Corrupted').not().isEmpty().trim().escape(),
+  ], (req, res) => {
 	const validationErrors = validationResult(req);
   	if(!validationErrors.isEmpty()){
 		console.log(validationErrors);
