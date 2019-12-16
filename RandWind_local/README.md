@@ -1,8 +1,10 @@
 About Project: 
+
 RandWind is a random number/character generator that uses the unpredictable motion of fluids. As of currently, turbulent flow of a fluid is still a mystery to scientists and researchers because there does not exist an accurate model or definition (by equations) for it. Because of this reason, turbulent flow's motion as a function of time can be considered "random" due to its unpredictability. Using image processing from OpenCV, RandWind analyzes the motion of the fluid as a function of time to generate "random" strings that can be used for many applications. 
 
 
 Repo Organization:
+
 node_modules - contains all necessary modules for running node.js
 python - holds all needed python files for the website
   frames - contains pictures of each frame being used
@@ -22,6 +24,7 @@ runtime.txt - specifies which version of python needs to be used in the heroku p
 
 
 Repo build/test:
+
 Steps to push to your personal heroku account:
 1. heroku login
 
