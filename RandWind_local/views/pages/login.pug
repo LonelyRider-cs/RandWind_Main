@@ -35,29 +35,33 @@ nav.navbar.navbar-expand-lg.navbar-light(style='background: #D7E6F3;')
           span.sr-only (current)
       li.nav-item
         a.nav-link(href='/saved_strings') My Generations
-      li.nav-item.active
-        a.nav-link(href='/login') Login
-      li.nav-item
-        a.nav-link(href='/registration') Register
-    .form-inline.my-2.my-lg-0
-      button.btn.btn-outline-light.my-2.my-sm-0(type='submit') Logout
+    - if(!loggedIn)
+        ul.navbar-nav.my-2.my-lg-0
+          li.nav-item
+            a.nav-link(href='/login') Login
+          li.nav-item
+            a.nav-link(href='/registration') Register
+    - else
+        .form-inline.my-2.my-lg-0
+          form(action='/logout' method='post')
+            button.btn.btn-outline-light.my-2.my-sm-0(type='submit') Logout
 .container
   .row
     .col-lg-12
-      form.form-signin
+      form.form-signin(action='/auth' method='POST')
         img.rounded-circle(src='../resources/img/randwind_logo.png' alt='' width='72' height='72')
         h1.h3.mb-3.font-weight-normal Please sign in
         label.sr-only(for='inputEmail') Email address
-        input#inputEmail.form-control(type='email' placeholder='Email address' required='' autofocus='')
+        input#inputEmail.form-control(type='email' placeholder='Email address' name = 'inputEmail' required='' autofocus='')
         label.sr-only(for='inputPassword') Password
-        input#inputPassword.form-control(type='password' placeholder='Password' required='')
+        input#inputPassword.form-control(type='password' placeholder='Password' name = 'inputPassword' required='')
         .checkbox.mb-3
           label
           input(type='checkbox' value='remember-me')
           |  Remember me |
           a(href='') Forgot Password?
           button.btn.btn-lg.btn-primary(type='submit') Sign in
-          a.btn.btn-lg.btn-primary(href='register.html') Register
+          a.btn.btn-lg.btn-primary(href='registration') Register
           p.mt-5.mb-3.text-muted &copy; 2018-2019
 script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut' crossorigin='anonymous')
