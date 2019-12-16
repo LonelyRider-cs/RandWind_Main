@@ -332,7 +332,7 @@ app.post('/register', [
 
 
 app.post('/saveString', [
-	check(req.session.currentString, 'String Corrupted').not().isEmpty().trim().escape(),
+	check('randSTR', 'String Corrupted').not().isEmpty().trim().escape(),
   ], (req, res) => {
 	const validationErrors = validationResult(req);
   	if(!validationErrors.isEmpty()){
