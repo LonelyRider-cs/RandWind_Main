@@ -1,5 +1,8 @@
-Repo Organization:
+About Project: 
+RandWind is a random number/character generator that uses the unpredictable motion of fluids. As of currently, turbulent flow of a fluid is still a mystery to scientists and researchers because there does not exist an accurate model or definition (by equations) for it. Because of this reason, turbulent flow's motion as a function of time can be considered "random" due to its unpredictability. Using image processing from OpenCV, RandWind analyzes the motion of the fluid as a function of time to generate "random" strings that can be used for many applications. 
 
+
+Repo Organization:
 node_modules - contains all necessary modules for running node.js
 python - holds all needed python files for the website
   frames - contains pictures of each frame being used
@@ -8,6 +11,8 @@ python - holds all needed python files for the website
   getFrames.py - extracts all frames from any video
   getRandomContours.py - used for testing to find the contours of the wind
   random10.txt - used for testing before getRandomContours.py was finished
+  contours_vid.py - iterates through every frame to get contour angles
+  video.py - reads in .mp4 and get every frame in video
 resources - contains all css and images for the website
 sql - contains all the sql statements that went into creating the database on a text files
 views/pages - contains all .pug fiiles
@@ -16,11 +21,11 @@ runtime.txt - specifies which version of python needs to be used in the heroku p
 
 
 
-Repo build/test
+Repo build/test:
 Steps to push to your personal heroku account:
 1. heroku login
 
-if you need to clone the ropository first:
+If you need to clone the ropository first:
 1. heroku git:clone -a randwind
 2. cd randwind
 
