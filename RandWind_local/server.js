@@ -312,8 +312,8 @@ app.post('/register', [
 		const business = req.body.businessStatus;
 		const security = req.body.securityStatus;
 
-		console.log(business);
-		console.log(security);
+		//console.log(business);
+		//console.log(security);
 
 
 		bcrypt.genSalt(saltRounds, function(err, salt) {
