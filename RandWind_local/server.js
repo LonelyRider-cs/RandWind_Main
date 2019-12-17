@@ -7,6 +7,8 @@
 var express = require('express'); //Ensure our express framework has been added
 var session = require('express-session');
 var app = express();
+const cors = require('cors');
+app.use(cors()); //enable cors
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
 //var cookieParser = require('cookie-parser'); //cookies //NO LONGER NEEDED Since version 1.5.0 of express session
 const { check, validationResult } = require('express-validator'); //For validating and sanitizing inputs
@@ -20,7 +22,7 @@ const saltRounds = 10;
 
 const pug = require('pug');
 
-const cors = require('cors');
+
 
 
 
@@ -51,7 +53,7 @@ const db = pgp(dbConfig);
 // set the view engine to pug
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
-app.use(cors()); //enable cors
+
 
 
 var mySession = {genid: function(req) {
