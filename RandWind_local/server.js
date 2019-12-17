@@ -147,7 +147,7 @@ const checkPassword = async (userEmail, userPassword) => {
 
 const registerUser = async (name,email,password,business,security) => {
 	console.log('Register function started')
-	db.none('INSERT INTO registration(user_name, user_email, user_pass, business, security) VALUES($1, $2, $3, $4, $5) ON CONFLICT DO NOTHING', [name,email,password,business,security])
+	db.one('INSERT INTO registration(user_name, user_email, user_pass, business, security) VALUES($1, $2, $3, $4, $5) RETURNING user_sid', [name,email,password,business,security])
 	.then(() => {
 		console.log('Register success')
 		return true;
@@ -155,6 +155,7 @@ const registerUser = async (name,email,password,business,security) => {
 	.catch(error => {
 		// display error message in case an error
 		//req.flash('error', error); //if this doesn't work for you replace with console.log
+		res.send('Registration failed. User probably already exists');
 		console.log('error',error)
 		return false;
 	});
@@ -267,7 +268,7 @@ app.post('/auth', function(req, res) { //Hitting login
 			res.redirect('/');
 			return;
 		}else { //Insuccesful login
-			console.log("Login Failed");
+			console.log("Login Failed", checkPassword(email, password));
 			res.send('Incorrect email and/or Password!');
 		}
 
