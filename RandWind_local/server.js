@@ -389,7 +389,7 @@ app.post('/load_generations', function(req,res){
 	db.any('SELECT rand_string, string_id FROM random_strings WHERE user_email=$1', [req.session.userEmail])
 	.then(retrievedStrings => {
 		if (retrievedStrings) {
-			res.send(retrievedStrings);
+			res.jsonp(retrievedStrings);
 			return retrievedStrings;
 		  } else {
 			console.log("No strings present")
