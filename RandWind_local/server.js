@@ -112,7 +112,7 @@ const isLoggedIn = (req, res, next) => {
 
 const findHash = async (userEmail) => {
 
-	return db.one('SELECT user_pass FROM registration WHERE user_email=$1', [userEmail], h => !!h);
+	return db.one('SELECT user_pass FROM registration WHERE user_email=$1', [userEmail]);
 	
 
 
@@ -160,7 +160,7 @@ const registerUser = async (name,email,password,business,security) => {
 
 const insertString = async (insertionString, email) => {
 	console.log('Inserting String');
-	db.none('INSERT INTO random_strings(rand_string, user_email) VALUES($1, $2) ON CONFLICT DO NOTHING', [insertionString,email])
+	db.one('INSERT INTO random_strings(rand_string, user_email) VALUES($1, $2) RETURNING string_id', [insertionString,email])
 	.then(() => {
 		console.log('String Insertion success')
 		return true;
@@ -169,6 +169,7 @@ const insertString = async (insertionString, email) => {
 		// display error message in case an error
 		//req.flash('error', error); //if this doesn't work for you replace with console.log
 		console.log('string insertion error',error)
+		res.send('String save failed!');
 		return false;
 	});
 }
@@ -382,6 +383,7 @@ app.get('/load_generations', function(req,res){
 		// display error message in case an error
 			//req.flash('error', error); //if this doesn't work for you replace with console.log
 			console.log(error);
+			
 	});
 });
 
