@@ -364,7 +364,7 @@ app.post('/saveString', (req, res) => {
 });
 
 
-app.get('/load_generations', function(req,res){
+app.post('/load_generations', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	console.log("loadstrings started");

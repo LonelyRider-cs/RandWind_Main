@@ -4,8 +4,8 @@ $(document).ready(function(){
     $.ajax({
         url: 'https://randwind.herokuapp.com/load_generations', //Change this for heroku
         headers: {  'Access-Control-Allow-Origin': 'https://randwind.herokuapp.com/' },
-        type: 'GET',
-        dataType: 'jsonp',
+        type: 'POST',
+        //dataType: 'jsonp',
         cache: false,
         success: function (data) {
             console.log('AJAX SUCCESS');
