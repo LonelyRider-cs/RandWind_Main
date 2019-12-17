@@ -126,10 +126,10 @@ const checkPassword = async (userEmail, userPassword) => {
 		bcrypt.compare(userPassword, hash.user_pass, function(err, res) { //res is true if match, false if not
 			if (res) { //If the password matches hash
 				console.log("Passwords match");
-				resolve(true);
+				return true;
 			} else {
 				console.log("Passwords do not match");
-				resolve(false);
+				return false;
 			}
 		});
 	 // } else {
@@ -140,7 +140,7 @@ const checkPassword = async (userEmail, userPassword) => {
 			// display error message in case an error
 				//req.flash('error', error); //if this doesn't work for you replace with console.log
 				console.log('ERROR: ', error);
-				reject(error);
+				return false;
 		});
 }
 
@@ -261,22 +261,26 @@ app.post('/auth', function(req, res) { //Hitting login
 	const password = req.body.inputPassword;
 	////
 	if (email && password) {
-		if(checkPassword(email, password) == true) { //Succesful login
-			req.session.loggedin = true;
-			req.session.userEmail = email;
-			console.log("Login Succesful");
-			res.redirect('/');
-			return;
-		}else { //Insuccesful login
-			console.log("Login Failed", checkPassword(email, password));
-			res.send('Incorrect email and/or Password!');
+		checkPassword(email, password)
+		.then(isMatch =>  { //Succesful login
+			console.log("Is Match: ",isMatch);
+			if(isMatch){
+				req.session.loggedin = true;
+				req.session.userEmail = email;
+				console.log("Login Succesful");
+				res.redirect('/');
+				return;
+			}else { //Insuccesful login
+				console.log("Login Failed", checkPassword(email, password));
+				res.send('Incorrect email and/or Password!');
+				return
 		}
 
-	} else {
-		console.log("Email/password absent")
-		res.send('Please enter email and Password!');
-		res.end();
-	}
+		}).catch(error => {
+			console.log("AUTH ERROR:", error);
+			res.send('Error in endpoint auth');
+			res.end();
+	});
 	return;
 });
 
