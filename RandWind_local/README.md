@@ -2,7 +2,9 @@ About Project:
 
 RandWind is a random number/character generator that uses the unpredictable motion of fluids. As of currently, turbulent flow of a fluid is still a mystery to scientists and researchers because there does not exist an accurate model or definition (by equations) for it. Because of this reason, turbulent flow's motion as a function of time can be considered "random" due to its unpredictability. Using image processing from OpenCV, RandWind analyzes the motion of the fluid as a function of time to generate "random" strings that can be used for many applications. 
 
-Website features: Website includes a user registration system which stores users in a postgres database. Passwords are salted and hashed with bcrypt. Users can save strings they've generated and retrieve them on the "My Generations" page. These strings are stored in a postgres database and rendered upon page load. Cookies keep users logged in. (Keep me logged in/forgot password buttons currently do nothing).
+Website features: Website includes a user registration system which stores users in a postgres database. Passwords are salted and hashed with bcrypt. Users can save strings they've generated and retrieve them on the "My Generations" page. These strings are stored in a postgres database and rendered upon page load. Cookies keep users logged in. (Keep me logged in/forgot password buttons currently do nothing). 
+
+YOU MUST have https:// at the start of the url for the user system to work, as it rejects unsecure connections. That is, make sure to use https://randwind.herokuapp.com/ and not randwind.herokuapp.com/
 
 
 Repo Organization: 
