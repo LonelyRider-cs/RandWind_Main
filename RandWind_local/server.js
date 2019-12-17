@@ -20,6 +20,9 @@ const saltRounds = 10;
 
 const pug = require('pug');
 
+const cors = require('cors');
+app.use(cors());
+
 
 const uuidv1 = require('uuid/v1'); //Used to generate unique strings (For session ID in our case)
 //Create Database Connection
