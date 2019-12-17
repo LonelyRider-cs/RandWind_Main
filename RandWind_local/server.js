@@ -280,9 +280,10 @@ app.post('/auth', function(req, res) { //Hitting login
 			console.log("AUTH ERROR:", error);
 			res.send('Error in endpoint auth');
 			res.end();
-	});
+		});
+	}
 	return;
-}
+});
 
 app.post('/logout', function(req,res){
 	req.session.destroy();
