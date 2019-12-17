@@ -4,7 +4,7 @@ RandWind is a random number/character generator that uses the unpredictable moti
 
 Website features: Website includes a user registration system which stores users in a postgres database. Passwords are salted and hashed with bcrypt. Users can save strings they've generated and retrieve them on the "My Generations" page. These strings are stored in a postgres database and rendered upon page load. Cookies keep users logged in. (Keep me logged in/forgot password buttons currently do nothing). 
 
-YOU MUST have https:// at the start of the url for the user system to work, as it rejects unsecure connections. That is, make sure to use https://randwind.herokuapp.com/ and not randwind.herokuapp.com/
+YOU MUST have https:// at the start of the url for the user system to work, as it rejects unsecure connections. That is, make sure to use https://randwinddev.herokuapp.com and not randwinddev.herokuapp.com/
 
 
 Repo Organization: 
@@ -48,4 +48,4 @@ To deploy changes:
 
 
 Website can be found at:
-https://randwind.herokuapp.com
+https://randwinddev.herokuapp.com
