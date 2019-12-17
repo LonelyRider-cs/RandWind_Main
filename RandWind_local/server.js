@@ -110,32 +110,37 @@ const isLoggedIn = (req, res, next) => {
     }
 };
 
+const findHash = async (userEmail) => {
+
+	return db.one('SELECT user_pass FROM registration WHERE user_email=$1', [userEmail], h => !!h);
+	
+
+
+  }
+
 const checkPassword = async (userEmail, userPassword) => {
-
-	db.one('SELECT user_pass FROM registration WHERE user_email=$1', [userEmail], h => h)
+	findHash(userEmail)
 	.then(hash => {
-    if(hash.lengh() > 0) {
-		console.log("Pass found: ",hash);
-		bcrypt.compare(userPassword, hash, function(err, res) { //res is true if match, false if not
-			if (res) { //If the password matches hash
-				return true;
-			} else {
+		if(hash.lengh() > 0) {
+			console.log("Pass found: ",hash);
+			bcrypt.compare(userPassword, hash, function(err, res) { //res is true if match, false if not
+				if (res) { //If the password matches hash
+					return true;
+				} else {
+					return false;
+				}
+			});
+	  } else {
+		return false;
+	  }
+		})
+		.catch(error => {
+			// display error message in case an error
+				//req.flash('error', error); //if this doesn't work for you replace with console.log
+				console.log('ERROR: ', error);
 				return false;
-			}
 		});
-  } else {
-    return false;
-  }
-	})
-	.catch(error => {
-		// display error message in case an error
-			//req.flash('error', error); //if this doesn't work for you replace with console.log
-			console.log('ERROR: ', error);
-			return false;
-	});
-
-
-  }
+}
 
 
 const registerUser = async (name,email,password,business,security) => {
