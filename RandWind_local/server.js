@@ -123,7 +123,7 @@ const checkPassword = async (userEmail, userPassword) => {
 	.then(hash => {
 		//if(hash.lengh() > 0) {
 		console.log("Pass found: ",hash);
-		bcrypt.compare(userPassword, hash, function(err, res) { //res is true if match, false if not
+		bcrypt.compare(userPassword, hash.user_pass, function(err, res) { //res is true if match, false if not
 			if (res) { //If the password matches hash
 				return true;
 			} else {
