@@ -75,7 +75,8 @@ console.log("node executed");
 app.use((req, res, next) => {
     if (!req.session.userEmail && req.session.cookie) {
         res.clearCookie('user_sid');
-    }
+	}
+	res.header("Access-Control-Allow-Origin", "*"); //allows cors
 	next();
 	return;
 });
@@ -366,7 +367,6 @@ app.post('/saveString', (req, res) => {
 
 app.post('/load_generations', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
- 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	console.log("loadstrings started");
 	db.any('SELECT rand_string, string_id FROM random_strings WHERE user_email=$1', [req.session.userEmail])
 	.then(retrievedStrings => {
