@@ -1,11 +1,13 @@
 
 $(document).ready(function(){
+  console.log('onready running');
     $.ajax({
         url: 'https://randwind.herokuapp.com/load_generations', //Change this for heroku
         type: 'GET',
         data: 'Test',
         cache: false,
         success: function (data) {
+            console.log('AJAX SUCCESS');
             //console.log(data)
             //console.log('meow')
             var stringContainer = $('#stringContainer');
