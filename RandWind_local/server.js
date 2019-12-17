@@ -121,18 +121,18 @@ const findHash = async (userEmail) => {
 const checkPassword = async (userEmail, userPassword) => {
 	findHash(userEmail)
 	.then(hash => {
-		if(hash.lengh() > 0) {
-			console.log("Pass found: ",hash);
-			bcrypt.compare(userPassword, hash, function(err, res) { //res is true if match, false if not
-				if (res) { //If the password matches hash
-					return true;
-				} else {
-					return false;
-				}
-			});
-	  } else {
-		return false;
-	  }
+		//if(hash.lengh() > 0) {
+		console.log("Pass found: ",hash);
+		bcrypt.compare(userPassword, hash, function(err, res) { //res is true if match, false if not
+			if (res) { //If the password matches hash
+				return true;
+			} else {
+				return false;
+			}
+		});
+	 // } else {
+		//return false;
+	 // }
 		})
 		.catch(error => {
 			// display error message in case an error
