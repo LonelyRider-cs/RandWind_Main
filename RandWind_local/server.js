@@ -169,7 +169,7 @@ const registerUser = async (name,email,password,business,security) => {
 	});
 }
 
-const insertString = async (insertionString, email) => {
+const insertString = (insertionString, email) => {
 	console.log('Inserting String');
 	db.one('INSERT INTO random_strings(rand_string, user_email) VALUES($1, $2) RETURNING string_id', [insertionString,email])
 	.then(() => {
