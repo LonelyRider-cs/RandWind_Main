@@ -2,6 +2,8 @@ About Project:
 
 RandWind is a random number/character generator that uses the unpredictable motion of fluids. As of currently, turbulent flow of a fluid is still a mystery to scientists and researchers because there does not exist an accurate model or definition (by equations) for it. Because of this reason, turbulent flow's motion as a function of time can be considered "random" due to its unpredictability. Using image processing from OpenCV, RandWind analyzes the motion of the fluid as a function of time to generate "random" strings that can be used for many applications. 
 
+Website features: Website includes a user registration system which stores users in a postgres database. Passwords are salted and hashed with bcrypt. Users can save strings they've generated and retrieve them on the "My Generations" page. These strings are stored in a postgres database and rendered upon page load. Cookies keep users logged in. (Keep me logged in/forgot password buttons currently do nothing).
+
 
 Repo Organization: 
 
@@ -15,7 +17,10 @@ python - holds all needed python files for the website
   random10.txt - used for testing before getRandomContours.py was finished
   contours_vid.py - iterates through every frame to get contour angles
   video.py - reads in .mp4 and get every frame in video
-resources - contains all css and images for the website
+resources - contains all js, css and images for the website
+    js
+      client_scripts  Used on the registration page to provide client feedback on their regstration
+      my_generations  Does an ajax call on load to retrieve saved strings of user & render them
 sql - contains all the sql statements that went into creating the database on a text files
 views/pages - contains all .pug fiiles
 requirements.txt - contains all the python modules needed to be used in the heroku python buildpack
