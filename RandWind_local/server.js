@@ -261,26 +261,19 @@ app.post('/auth', function(req, res) { //Hitting login
 	const password = req.body.inputPassword;
 	////
 	if (email && password) {
-		checkPassword(email, password)
-		.then(isMatch =>  { //Succesful login
-			console.log("Is Match: ",isMatch);
-			if(isMatch){
-				req.session.loggedin = true;
-				req.session.userEmail = email;
-				console.log("Login Succesful");
-				res.redirect('/');
-				return;
-			}else { //Insuccesful login
-				console.log("Login Failed", checkPassword(email, password));
-				res.send('Incorrect email and/or Password!');
-				return
+		isMatch = checkPassword(email, password)
+		console.log("Is Match: ",isMatch);
+		if(isMatch){
+			req.session.loggedin = true;
+			req.session.userEmail = email;
+			console.log("Login Succesful");
+			res.redirect('/');
+			return;
+		}else { //Insuccesful login
+			console.log("Login Failed", checkPassword(email, password));
+			res.send('Incorrect email and/or Password!');
+			return
 		}
-
-		}).catch(error => {
-			console.log("AUTH ERROR:", error);
-			res.send('Error in endpoint auth');
-			res.end();
-		});
 	}
 	return;
 });
