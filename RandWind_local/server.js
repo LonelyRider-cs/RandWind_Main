@@ -257,7 +257,7 @@ app.post('/auth', function(req, res) { //Hitting login
 	const password = req.body.inputPassword;
 	////
 	if (email && password) {
-		if(checkPassword(email, password)) { //Succesful login
+		if(checkPassword(email, password) == true) { //Succesful login
 			req.session.loggedin = true;
 			req.session.userEmail = email;
 			console.log("Login Succesful");
@@ -366,7 +366,7 @@ app.post('/saveString', (req, res) => {
 });
 
 
-app.post('/load_generations', function(req,res){
+app.get('/load_generations', function(req,res){
 	console.log("loadstrings started");
 	db.any('SELECT rand_string, string_id FROM random_strings WHERE user_email=$1', [req.session.userEmail])
 	.then(retrievedStrings => {

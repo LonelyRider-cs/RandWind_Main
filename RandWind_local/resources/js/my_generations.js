@@ -2,7 +2,7 @@
 $(document).ready(function(){
     $.ajax({
         url: 'https://randwind.herokuapp.com/load_generations', //Change this for heroku
-        type: 'POST',
+        type: 'GET',
         data: 'Test',
         cache: false,
         success: function (data) {
