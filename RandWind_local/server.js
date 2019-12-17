@@ -282,7 +282,7 @@ app.post('/auth', function(req, res) { //Hitting login
 			res.end();
 	});
 	return;
-});
+}
 
 app.post('/logout', function(req,res){
 	req.session.destroy();
