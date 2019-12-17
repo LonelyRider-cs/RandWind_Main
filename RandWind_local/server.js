@@ -115,6 +115,7 @@ const checkPassword = async (userEmail, userPassword) => {
 	db.one('SELECT user_pass FROM registration WHERE user_email=$1', [userEmail], h => h)
 	.then(hash => {
     if(hash.lengh() > 0) {
+		console.log("Pass found: ",hash);
 		bcrypt.compare(userPassword, hash, function(err, res) { //res is true if match, false if not
 			if (res) { //If the password matches hash
 				return true;
@@ -129,7 +130,8 @@ const checkPassword = async (userEmail, userPassword) => {
 	.catch(error => {
 		// display error message in case an error
 			//req.flash('error', error); //if this doesn't work for you replace with console.log
-			console.log(error);
+			console.log('ERROR: ' error);
+			return false;
 	});
 
 
