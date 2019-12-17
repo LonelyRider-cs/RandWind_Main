@@ -3,7 +3,7 @@ $(document).ready(function(){
   console.log('onready running');
     $.ajax({
         url: 'https://randwind.herokuapp.com/load_generations', //Change this for heroku
-        headers: {  'Access-Control-Allow-Origin': 'https://randwind.herokuapp.com/' },
+        headers: {  'Access-Control-Allow-Origin': 'https://randwind.herokuapp.com/load_generations' },
         type: 'POST',
         //dataType: 'jsonp',
         cache: false,
