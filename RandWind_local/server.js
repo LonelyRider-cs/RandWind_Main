@@ -126,10 +126,10 @@ const checkPassword = async (userEmail, userPassword) => {
 		bcrypt.compare(userPassword, hash.user_pass, function(err, res) { //res is true if match, false if not
 			if (res) { //If the password matches hash
 				console.log("Passwords match");
-				return true;
+				resolve(true);
 			} else {
 				console.log("Passwords do not match");
-				return false;
+				resolve(false);
 			}
 		});
 	 // } else {
@@ -140,7 +140,7 @@ const checkPassword = async (userEmail, userPassword) => {
 			// display error message in case an error
 				//req.flash('error', error); //if this doesn't work for you replace with console.log
 				console.log('ERROR: ', error);
-				return false;
+				reject(error);
 		});
 }
 
