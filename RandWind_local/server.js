@@ -383,7 +383,7 @@ app.post('/saveString', (req, res) => {
 });
 
 
-app.post('/load_generations', function(req,res){
+app.get('/load_generations', function(req,res){
 	//res.header("Access-Control-Allow-Origin", "*");
 	console.log("loadstrings started");
 	db.any('SELECT rand_string, string_id FROM random_strings WHERE user_email=$1', [req.session.userEmail])
