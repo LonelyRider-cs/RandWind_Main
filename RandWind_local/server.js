@@ -119,7 +119,7 @@ const findHash =  (userEmail) => {
   }
 
 const checkPassword = (userEmail, userPassword) => {
-	findHash(userEmail)
+	await findHash(userEmail)
 	.then(hash => {
 		//if(hash.lengh() > 0) {
 		console.log("Pass found: ",hash.user_pass);
