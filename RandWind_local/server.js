@@ -130,7 +130,7 @@ const checkPassword = async (userEmail, userPassword) => {
 	.catch(error => {
 		// display error message in case an error
 			//req.flash('error', error); //if this doesn't work for you replace with console.log
-			console.log('ERROR: ' error);
+			console.log('ERROR: ', error);
 			return false;
 	});
 
