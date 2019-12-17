@@ -110,7 +110,7 @@ const isLoggedIn = (req, res, next) => {
     }
 };
 
-const findHash = async (userEmail) => {
+const findHash =  (userEmail) => {
 
 	return db.one('SELECT user_pass FROM registration WHERE user_email=$1', [userEmail]);
 	
