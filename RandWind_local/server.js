@@ -309,10 +309,6 @@ app.post('/register', [
 	const validationErrors = validationResult(req);
   	if(!validationErrors.isEmpty()){
 		console.log(validationErrors);
-		var errorsList = '';
-		for (var i = 0; i < validationErrors.length; i++) {
-		errorsList += '<li>' + validationErrors[i].msg + '</li>';
-		}
 		return;
 	}else{
 
