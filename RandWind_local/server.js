@@ -118,7 +118,7 @@ const findHash = async (userEmail) => {
 
   }
 
-const checkPassword = async (userEmail, userPassword) => {
+const checkPassword = (userEmail, userPassword) => {
 	findHash(userEmail)
 	.then(hash => {
 		//if(hash.lengh() > 0) {
