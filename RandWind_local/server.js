@@ -21,7 +21,7 @@ const saltRounds = 10;
 const pug = require('pug');
 
 const cors = require('cors');
-app.use(cors());
+
 
 
 const uuidv1 = require('uuid/v1'); //Used to generate unique strings (For session ID in our case)
@@ -51,6 +51,8 @@ const db = pgp(dbConfig);
 // set the view engine to pug
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
+app.use(cors()); //enable cors
+
 
 var mySession = {genid: function(req) {
   return uuidv1(); // use UUIDs for session IDs (makes unique ses ID)
@@ -79,7 +81,7 @@ app.use((req, res, next) => {
     if (!req.session.userEmail && req.session.cookie) {
         res.clearCookie('user_sid');
 	}
-	res.header("Access-Control-Allow-Origin", "*"); //allows cors
+	//res.header("Access-Control-Allow-Origin", "*"); //allows cors
 	next();
 	return;
 });
@@ -183,7 +185,7 @@ const insertString = async (insertionString, email) => {
 
 
 
-//workaround for cors
+/*//workaround for cors
 app.all("/*", function (req, res, next) {
 
 	res.header("Access-Control-Allow-Origin", req.headers.origin);
@@ -195,7 +197,7 @@ app.all("/*", function (req, res, next) {
 	} else {
 	  next();
 	}
-  });
+  });*/
 
 // home page
 app.get('/', function(req, res) {
@@ -380,7 +382,7 @@ app.post('/saveString', (req, res) => {
 
 
 app.post('/load_generations', function(req,res){
-	res.header("Access-Control-Allow-Origin", "*");
+	//res.header("Access-Control-Allow-Origin", "*");
 	console.log("loadstrings started");
 	db.any('SELECT rand_string, string_id FROM random_strings WHERE user_email=$1', [req.session.userEmail])
 	.then(retrievedStrings => {
